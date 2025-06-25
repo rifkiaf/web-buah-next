@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "🍎 Sari Buah",
+  title: "Sari Buah",
   description: "Fresh fruits for a healthy lifestyle",
 };
 
