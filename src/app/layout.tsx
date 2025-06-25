@@ -30,6 +30,19 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🍎</text></svg>" />
+        {/* SEO test */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Fresh fruits for a healthy lifestyle" />
+        <meta name="keywords" content="buah, buah segar, sari buah, toko buah, healthy, fruits, fresh, vitamin, belanja buah online" />
+        <meta property="og:title" content="Sari Buah" />
+        <meta property="og:description" content="Fresh fruits for a healthy lifestyle" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Sari Buah" />
+        <meta property="og:image" content="/apple-og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sari Buah" />
+        <meta name="twitter:description" content="Fresh fruits for a healthy lifestyle" />
+        <meta name="twitter:image" content="/apple-og.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
