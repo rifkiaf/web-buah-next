@@ -114,7 +114,7 @@ export default function Navbar() {
                         : "text-white hover:bg-white/20"
                     } ${isActiveLink("/admin/dashboard")}`}
                   >
-                    Admin Dasbor
+                    Admin Dashboard
                   </Link>
                 ) : (
                   <Link
@@ -234,9 +234,9 @@ export default function Navbar() {
               <>
                 {isAdmin ? (
                   <Link
-                    href="/admin"
+                    href="/admin/dashboard"
                     className={`block px-3 py-2 rounded-md font-medium transition-colors text-gray-700 hover:bg-gray-100 ${isActiveLink(
-                      "/admin"
+                      "/admin/dashboard"
                     )}`}
                   >
                     Admin Dashboard
