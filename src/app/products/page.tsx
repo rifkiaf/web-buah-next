@@ -156,7 +156,8 @@ const Products = () => {
               </h3>
               <p className="text-sm text-gray-500">{product.category}</p>
               <p className="text-lg font-bold text-green-600 mt-2">
-                {formatCurrency(product.price)}
+                {formatCurrency(product.price)}{" "}
+                <span className="text-base font-normal text-gray-500">/kg</span>
               </p>
               <p className="text-sm text-gray-500 mt-1">
                 Stok: {product.stock}
@@ -209,7 +210,8 @@ const Products = () => {
 
                 <div>
                   <p className="text-2xl font-bold text-green-600">
-                    {formatCurrency(selectedProduct.price)}
+                    {formatCurrency(selectedProduct.price)}{" "}
+                    <span className="text-base font-normal text-gray-500">/kg</span>
                   </p>
                   <p className="text-sm text-gray-500">
                     Stok: {selectedProduct.stock}

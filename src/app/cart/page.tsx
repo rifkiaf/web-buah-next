@@ -170,7 +170,7 @@ export default function Cart() {
                           -
                         </button>
                         <span className="mx-4 text-gray-700">
-                          {item.quantity}
+                          {item.quantity} <span className="text-xs text-gray-500">kg</span>
                         </span>
                         <button
                           onClick={() =>
@@ -184,7 +184,7 @@ export default function Cart() {
                     </div>
                     <div className="ml-6">
                       <p className="text-lg font-semibold text-gray-900">
-                        {formatCurrency(item.price * item.quantity)}
+                        {formatCurrency(item.price * item.quantity)} 
                       </p>
                       <button
                         onClick={() => removeFromCart(item.id)}

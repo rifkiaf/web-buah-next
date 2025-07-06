@@ -106,16 +106,28 @@ export default function Navbar() {
             {isMounted && currentUser ? (
               <>
                 {isAdmin ? (
-                  <Link
-                    href="/admin/dashboard"
-                    className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                      isScrolled
-                        ? "text-gray-700 hover:bg-gray-100"
-                        : "text-white hover:bg-white/20"
-                    } ${isActiveLink("/admin/dashboard")}`}
-                  >
-                    Admin Dashboard
-                  </Link>
+                  <>
+                    <Link
+                      href="/admin/dashboard"
+                      className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                        isScrolled
+                          ? "text-gray-700 hover:bg-gray-100"
+                          : "text-white hover:bg-white/20"
+                      } ${isActiveLink("/admin/dashboard")}`}
+                    >
+                      Admin Dashboard
+                    </Link>
+                    <Link
+                      href="/prediction"
+                      className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                        isScrolled
+                          ? "text-gray-700 hover:bg-gray-100"
+                          : "text-white hover:bg-white/20"
+                      } ${isActiveLink("/prediction")}`}
+                    >
+                      Prediksi Stok
+                    </Link>
+                  </>
                 ) : (
                   <Link
                     href="/my-orders"
@@ -233,14 +245,22 @@ export default function Navbar() {
             {isMounted && currentUser ? (
               <>
                 {isAdmin ? (
-                  <Link
-                    href="/admin/dashboard"
-                    className={`block px-3 py-2 rounded-md font-medium transition-colors text-gray-700 hover:bg-gray-100 ${isActiveLink(
-                      "/admin/dashboard"
-                    )}`}
-                  >
-                    Admin Dashboard
-                  </Link>
+                  <>
+                    <Link
+                      href="/admin/dashboard"
+                      className={`block px-3 py-2 rounded-md font-medium transition-colors text-gray-700 hover:bg-gray-100 ${isActiveLink(
+                        "/admin/dashboard"
+                      )}`}
+                    >
+                      Admin Dashboard
+                    </Link>
+                    <Link
+                      href="/prediction"
+                      className="block px-3 py-2 rounded-md font-medium transition-colors text-gray-700 hover:bg-gray-100"
+                    >
+                      Prediksi Stok
+                    </Link>
+                  </>
                 ) : (
                   <Link
                     href="/my-orders"
