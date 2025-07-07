@@ -14,12 +14,12 @@ interface PrediksiResponse {
 export default function PredictionPage() {
   const [buahList, setBuahList] = useState<string[]>([]);
   const [buah, setBuah] = useState("");
-  const [tahun, setTahun] = useState<number>(new Date().getFullYear());
   const [bulan, setBulan] = useState<number>(new Date().getMonth() + 1);
   const [mingguKe, setMingguKe] = useState<number>(1);
   const [result, setResult] = useState<PrediksiResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [tahun] = useState<number>(2025); // Tahun tetap 2025 sesuai backend
 
   useEffect(() => {
     fetch("https://rifkiaf-prediksi-stok-buah.hf.space/daftar-buah")
@@ -40,7 +40,7 @@ export default function PredictionPage() {
       const res = await fetch("https://rifkiaf-prediksi-stok-buah.hf.space/prediksi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ buah, tahun, bulan, minggu_ke: mingguKe }),
+        body: JSON.stringify({ buah, bulan, minggu_ke: mingguKe }),
       });
       const data = await res.json();
       if (data.error) setError(data.error);
@@ -62,10 +62,10 @@ export default function PredictionPage() {
     <div className="max-w-2xl mx-auto py-12 px-4">
       <div className="bg-green-500 rounded-xl shadow-lg p-8 mb-8 text-white text-center">
         <h1 className="text-3xl font-extrabold mb-2 flex items-center justify-center gap-2">
-          <span role="img" aria-label="apple">🍎</span> Prediksi Stok Buah
+          <span role="img" aria-label="apple">🍎</span> Prediksi Stok Buah 2025
         </h1>
-        <p className="text-lg font-medium mb-1">Prediksi stok mingguan untuk buah segar di toko Anda.</p>
-        <p className="text-sm opacity-90">Pilih buah, tahun, bulan, dan minggu ke berapa untuk melihat prediksi stok pada minggu tersebut.</p>
+        <p className="text-lg font-medium mb-1">Prediksi stok mingguan untuk buah di toko SariBuah.</p>
+        <p className="text-sm opacity-90">Pilih buah, bulan, dan minggu ke berapa untuk melihat prediksi stok pada minggu tersebut.</p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg shadow border">
         <div>
@@ -84,18 +84,6 @@ export default function PredictionPage() {
           </select>
         </div>
         <div className="flex gap-4">
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold text-gray-700">Tahun</label>
-            <input
-              type="number"
-              min={2020}
-              max={2100}
-              className="border-2 border-green-400 focus:border-green-600 rounded px-3 py-2 w-full outline-none transition"
-              value={tahun}
-              onChange={e => setTahun(Number(e.target.value))}
-              required
-            />
-          </div>
           <div className="flex-1">
             <label className="block mb-1 font-semibold text-gray-700">Bulan</label>
             <select
@@ -140,7 +128,6 @@ export default function PredictionPage() {
           <h2 className="text-xl font-bold mb-4 text-green-700 flex items-center gap-2"><span role="img" aria-label="chart">📈</span> Hasil Prediksi Mingguan</h2>
           <div className="mb-4 flex flex-wrap gap-4">
             <div className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">Buah: <span className="font-bold">{result.buah.replace(/_kg$/, "").charAt(0).toUpperCase() + result.buah.replace(/_kg$/, "").slice(1)}</span></div>
-            <div className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">Tahun: <span className="font-bold">{result.tahun}</span></div>
             <div className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">Bulan: <span className="font-bold">{bulanList[result.bulan-1]}</span></div>
             <div className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">Minggu ke-<span className="font-bold">{result.minggu_ke_bulan}</span></div>
           </div>
@@ -154,7 +141,7 @@ export default function PredictionPage() {
             <tbody>
               <tr>
                 <td className="border px-3 py-2 font-mono">{result.tanggal}</td>
-                <td className="border px-3 py-2 font-mono font-bold text-green-700">{result.prediksi_kg}</td>
+                <td className="border px-3 py-2 font-mono font-bold text-green-700">{Math.round(result.prediksi_kg)}</td>
               </tr>
             </tbody>
           </table>
