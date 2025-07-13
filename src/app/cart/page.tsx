@@ -26,6 +26,7 @@ declare global {
   }
 }
 
+import { useRouter } from "next/navigation";
 export default function Cart() {
   const {
     cartItems,
@@ -40,7 +41,19 @@ export default function Cart() {
     setShippingOption,
   } = useCart();
 
-  const { currentUser } = useAuth();
+  const { currentUser, isAdmin } = useAuth();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (currentUser && isAdmin) {
+      router.replace("/login");
+      return;
+    }
+    if (!currentUser) {
+      router.replace("/login");
+      return;
+    }
+  }, [currentUser, isAdmin, router]);
 
   const handleShippingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShippingOption(event.target.value);
@@ -91,7 +104,7 @@ export default function Cart() {
           console.log("Success:", result);
 
           // Contoh panggil API update status pembayaran
-          await fetch("https://backend-buah.vercel.app/api/update-transaction-status", {
+          await fetch("https://backend-buah.vercel.app/api/midtrans-notification", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

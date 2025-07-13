@@ -27,10 +27,23 @@ interface Order {
   };
 }
 
+import { useRouter } from "next/navigation";
 const MyOrders = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, isAdmin } = useAuth();
+  const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (currentUser && isAdmin) {
+      router.replace("/login");
+      return;
+    }
+    if (!currentUser) {
+      router.replace("/login");
+      return;
+    }
+  }, [currentUser, isAdmin, router]);
 
   useEffect(() => {
     const fetchOrders = async () => {

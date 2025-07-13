@@ -42,7 +42,11 @@ interface Transaction {
   };
 }
 
+import { useAuth } from "../../../context/AuthContext";
+import { useRouter } from "next/navigation";
 const DashboardAdmin = () => {
+  const { currentUser, isAdmin } = useAuth();
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -54,9 +58,14 @@ const DashboardAdmin = () => {
   const [loadingTransactions, setLoadingTransactions] = useState(true);
 
   useEffect(() => {
-    console.log(
-      "DashboardAdmin mounted, fetching products and transactions..."
-    );
+    if (currentUser && !isAdmin) {
+      router.replace("/login");
+      return;
+    }
+    if (!currentUser) {
+      router.replace("/login");
+      return;
+    }
     fetchProducts();
     fetchTransactions(); // Memanggil data transaksi
   }, []);

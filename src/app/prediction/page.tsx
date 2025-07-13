@@ -11,7 +11,11 @@ interface PrediksiResponse {
   prediksi_kg: number;
 }
 
+import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/navigation";
 export default function PredictionPage() {
+  const { currentUser, isAdmin } = useAuth();
+  const router = useRouter();
   const [buahList, setBuahList] = useState<string[]>([]);
   const [buah, setBuah] = useState("");
   const [bulan, setBulan] = useState<number>(new Date().getMonth() + 1);
@@ -22,6 +26,14 @@ export default function PredictionPage() {
   const [tahun] = useState<number>(2025);
 
   useEffect(() => {
+    if (currentUser && !isAdmin) {
+      router.replace("/login");
+      return;
+    }
+    if (!currentUser) {
+      router.replace("/login");
+      return;
+    }
     fetch("https://rifkiaf-prediksi-stok-buah.hf.space/daftar-buah")
       .then((res) => res.json())
       .then((data) => {
